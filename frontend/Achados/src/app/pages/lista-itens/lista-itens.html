@@ -1,0 +1,66 @@
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-titulo">Perdeu algo na escola?</h1>
+    <p class="hero-texto">Veja se o seu item já foi achado e entregue ao setor de apoio.</p>
+
+    <form class="busca" (ngSubmit)="carregar()">
+      <input class="form-control form-control-lg" name="busca" [(ngModel)]="busca"
+             placeholder="Mochila, garrafa, chave..." aria-label="Buscar item">
+      <button class="btn btn-primary btn-lg" type="submit">Buscar</button>
+    </form>
+
+    <div class="chips" role="group" aria-label="Categorias">
+      <button type="button" class="chip" [class.ativo]="categoriaId === null"
+              (click)="selecionarCategoria(null)">Todas</button>
+      @for (c of categorias(); track c.id) {
+        <button type="button" class="chip" [class.ativo]="categoriaId === c.id"
+                (click)="selecionarCategoria(c.id)">{{ c.nome }}</button>
+      }
+    </div>
+  </div>
+</section>
+
+<main class="container pt-4">
+  @if (carregando()) {
+    <p class="contagem">Carregando itens...</p>
+  } @else if (erro()) {
+    <div class="alert alert-danger">{{ erro() }}</div>
+  } @else if (itens().length === 0) {
+    <div class="vazio">
+      <p class="vazio-titulo">Nenhum item encontrado</p>
+      <p>Tente outra palavra ou veja todas as categorias.</p>
+      <button type="button" class="btn btn-outline-primary" (click)="limpar()">
+        Ver todos os itens
+      </button>
+    </div>
+  } @else {
+    <p class="contagem">
+      {{ itens().length }} {{ itens().length === 1 ? 'item encontrado' : 'itens encontrados' }}
+    </p>
+    <div class="row g-4">
+      @for (item of itens(); track item.id) {
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <a class="cartao" [routerLink]="['/item', item.id]">
+            <div class="cartao-foto">
+              @if (item.foto) {
+                <img [src]="urlFoto(item.foto)" [alt]="item.nome">
+              } @else {
+                <div class="sem-foto">Sem foto</div>
+              }
+              <span class="selo"
+                    [class.selo-disponivel]="item.situacao === 'disponivel'"
+                    [class.selo-devolvido]="item.situacao === 'devolvido'">
+                {{ item.situacao === 'disponivel' ? 'Disponível' : 'Devolvido' }}
+              </span>
+            </div>
+            <div class="cartao-corpo">
+              <h2 class="cartao-titulo">{{ item.nome }}</h2>
+              <p class="cartao-linha">{{ item.local_encontrado }}</p>
+              <p class="cartao-linha">Achado em {{ item.data_encontrado | date:'dd/MM/yyyy' }}</p>
+            </div>
+          </a>
+        </div>
+      }
+    </div>
+  }
+</main>

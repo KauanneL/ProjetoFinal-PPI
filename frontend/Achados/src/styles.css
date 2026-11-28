@@ -1,1 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --tinta: #1f2a44;
+  --papel: #f4f6fb;
+  --marca-texto: #ffe066;
+  --linha: #dde2ee;
+  --texto-suave: #5b6478;
+  --disponivel-bg: #dff3ee;
+  --disponivel-tx: #0f6b5c;
+  --devolvido-bg: #e8ebf2;
+  --devolvido-tx: #5b6478;
+
+  --bs-body-bg: #f4f6fb;
+  --bs-body-color: #1f2a44;
+  --bs-body-font-family: 'Figtree', system-ui, sans-serif;
+  --bs-link-color-rgb: 31, 42, 68;
+  --bs-link-hover-color-rgb: 31, 42, 68;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bricolage Grotesque', 'Figtree', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Botões */
+.btn { font-weight: 600; border-radius: 0.6rem; }
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--tinta);
+  --bs-btn-border-color: var(--tinta);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #2c3b5e;
+  --bs-btn-hover-border-color: #2c3b5e;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #16203a;
+  --bs-btn-active-border-color: #16203a;
+  --bs-btn-disabled-bg: var(--tinta);
+  --bs-btn-disabled-border-color: var(--tinta);
+  --bs-btn-focus-shadow-rgb: 31, 42, 68;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--tinta);
+  --bs-btn-border-color: var(--tinta);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--tinta);
+  --bs-btn-hover-border-color: var(--tinta);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--tinta);
+  --bs-btn-active-border-color: var(--tinta);
+  --bs-btn-focus-shadow-rgb: 31, 42, 68;
+}
+
+/* Campos */
+.form-control, .form-select { border-color: var(--linha); border-radius: 0.6rem; }
+.form-control:focus, .form-select:focus {
+  border-color: var(--tinta);
+  box-shadow: 0 0 0 0.25rem rgba(31, 42, 68, 0.15);
+}
+
+/* Peças usadas em mais de uma tela */
+.selo {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.selo-disponivel { background: var(--disponivel-bg); color: var(--disponivel-tx); }
+.selo-devolvido { background: var(--devolvido-bg); color: var(--devolvido-tx); }
+
+.sem-foto {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--texto-suave);
+}

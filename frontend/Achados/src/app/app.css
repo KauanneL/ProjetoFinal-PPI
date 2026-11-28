@@ -1,0 +1,38 @@
+.topo { background: #fff; border-bottom: 1px solid var(--linha); }
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--tinta);
+  text-decoration: none;
+}
+.marca-icone {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: var(--marca-texto);
+}
+
+.topo-link {
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.5rem;
+  color: var(--texto-suave);
+  font-weight: 600;
+  text-decoration: none;
+}
+.topo-link:hover { color: var(--tinta); background: var(--papel); }
+.topo-link.ativo { color: var(--tinta); background: var(--marca-texto); }
+
+.rodape {
+  margin-top: 4rem;
+  background: #fff;
+  border-top: 1px solid var(--linha);
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}

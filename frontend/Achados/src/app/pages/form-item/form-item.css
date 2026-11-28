@@ -1,0 +1,8 @@
+.form-pagina { max-width: 680px; }
+
+form {
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}

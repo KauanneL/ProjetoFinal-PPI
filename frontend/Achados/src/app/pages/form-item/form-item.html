@@ -1,0 +1,61 @@
+<div class="container py-4 form-pagina">
+  <h1 class="h3 mb-3">{{ id ? 'Editar item' : 'Cadastrar item encontrado' }}</h1>
+
+  <form #f="ngForm" (ngSubmit)="salvar()">
+    <div class="mb-3">
+      <label class="form-label" for="nome">Nome do item</label>
+      <input id="nome" name="nome" class="form-control"
+             [(ngModel)]="form.nome" required maxlength="100">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" class="form-control" rows="3"
+                [(ngModel)]="form.descricao" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="categoria">Categoria</label>
+      <select id="categoria" name="categoria" class="form-select"
+              [(ngModel)]="form.categoria_id" required>
+        <option [ngValue]="null" disabled>Selecione...</option>
+        @for (c of categorias(); track c.id) {
+          <option [ngValue]="c.id">{{ c.nome }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6 mb-3">
+        <label class="form-label" for="local">Local onde foi encontrado</label>
+        <input id="local" name="local" class="form-control"
+               [(ngModel)]="form.local_encontrado" required maxlength="100">
+      </div>
+      <div class="col-12 col-md-6 mb-3">
+        <label class="form-label" for="data">Data em que foi encontrado</label>
+        <input id="data" name="data" type="date" class="form-control"
+               [(ngModel)]="form.data_encontrado" required>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="foto">Foto (JPG, PNG ou WEBP, até 5 MB)</label>
+      <input id="foto" type="file" class="form-control"
+             accept="image/jpeg,image/png,image/webp" (change)="onArquivo($event)">
+      @if (fotoAtual) {
+        <div class="form-text">Já existe uma foto. Envie outra só se quiser trocar.</div>
+      }
+    </div>
+
+    @if (erro()) {
+      <div class="alert alert-danger">{{ erro() }}</div>
+    }
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" type="submit" [disabled]="f.invalid || salvando()">
+        {{ salvando() ? 'Salvando...' : 'Salvar' }}
+      </button>
+      <a class="btn btn-outline-secondary" routerLink="/">Cancelar</a>
+    </div>
+  </form>
+</div>

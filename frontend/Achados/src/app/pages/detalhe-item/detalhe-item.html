@@ -1,0 +1,54 @@
+<div class="container pt-4">
+  <a routerLink="/" class="voltar">← Voltar para a lista</a>
+
+  @if (carregando()) {
+    <p>Carregando...</p>
+  } @else if (erro()) {
+    <div class="alert alert-danger">{{ erro() }}</div>
+  } @else if (item(); as i) {
+    <article class="row g-4 g-lg-5">
+      <div class="col-12 col-md-6">
+        <div class="detalhe-foto">
+          @if (i.foto) {
+            <img [src]="urlFoto(i.foto)" [alt]="i.nome">
+          } @else {
+            <div class="sem-foto">Sem foto</div>
+          }
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <span class="selo"
+              [class.selo-disponivel]="i.situacao === 'disponivel'"
+              [class.selo-devolvido]="i.situacao === 'devolvido'">
+          {{ i.situacao === 'disponivel' ? 'Disponível' : 'Devolvido' }}
+        </span>
+
+        <h1 class="detalhe-titulo">{{ i.nome }}</h1>
+        @if (i.categoria_nome) {
+          <p class="text-secondary mb-0">{{ i.categoria_nome }}</p>
+        }
+        <p class="detalhe-descricao">{{ i.descricao }}</p>
+
+        <dl class="detalhe-dados">
+          <div>
+            <dt>Onde foi achado</dt>
+            <dd>{{ i.local_encontrado }}</dd>
+          </div>
+          <div>
+            <dt>Data</dt>
+            <dd>{{ i.data_encontrado | date:'dd/MM/yyyy' }}</dd>
+          </div>
+        </dl>
+
+        @if (i.situacao === 'disponivel') {
+          <div class="aviso aviso-busca">
+            <strong>É seu?</strong> Procure o setor de apoio da escola e diga o nome do item para retirá-lo.
+          </div>
+        } @else {
+          <div class="aviso aviso-ok">Este item já foi devolvido ao dono.</div>
+        }
+      </div>
+    </article>
+  }
+</div>
